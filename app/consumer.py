@@ -40,8 +40,13 @@ class Consumer(ConsumerMixin):
 
 
 if __name__ == "__main__":
-    exchange = Exchange("traxion-exchange", type="direct")
-    queues = [Queue("traxion-queue", exchange, routing_key="traxion")]
+    xchange_name = os.getenv('RABBITMQ_EXCHANGE_NAME')
+    exchange_type = os.getenv('RABBITMQ_EXCHANGE_TYPE')
+    routing_key = os.getenv('RABBITMQ_ROUTING_KEY')
+    queue_name = os.getenv('RABBITMQ_LISTENING_QUEUE_NAME')
+
+    exchange = Exchange(xchange_name, type=exchange_type)
+    queues = [Queue(queue_name, exchange, routing_key=routing_key)]
 
     with Connection(rabbit_url, heartbeat=4) as conn:
         worker = Consumer(conn, queues)
