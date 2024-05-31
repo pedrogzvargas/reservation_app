@@ -10,12 +10,13 @@ Meta
 Author:
     Pedro Jesús González Vargas
 
-
-Elementos
+Componentes del proyecto
 ----
 
-Author:
-    Pedro Jesús González Vargas
+### 1. FastApi
+### 2. RabbitMQ
+### 3. PostgreSQL
+
 
 Uso con docker y docker compose
 -----
@@ -38,6 +39,15 @@ Para construir y levantar los contenedores usamos los comandos:
     $ docker-compose build --no-cache
 
     $ docker-compose up
+
+Los puertos de docker en local son los siguientes
+    
+    App -> 8000
+    
+    Postgres -> 5434
+
+    RabbitMQ -> 15672, 5672
+
 
 Uso con entorno virtual local
 -----
@@ -63,3 +73,15 @@ Instalamos los requerimientos:
 Corremos el proyecto con el siguiente comando:
 
     $  uvicorn app.main_app:app --reload
+
+
+En el repositorio ya existe un archivo con 7000 usuarios, pero de igual manera podemos crear un listado de usuarios con un script Python:
+
+    $ cd modules/shared/infraestructure
+    $ python passenger_data_generator.py
+
+
+Podemos cargar los usuarios a la base de datos con el siguiente comando, este usa el archivo creado previamente.
+
+    $ cd modules/shared/infraestructure
+    $ pyhton load_passenger_data_to_db.py

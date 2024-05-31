@@ -5,7 +5,7 @@ from uuid import uuid4
 
 class PassengerDataGenerator:
     @staticmethod
-    def genetate(file_name: str = "passenger_file.csv"):
+    def genetate(file_name: str = "passenger_file.csv") -> None:
         faker = Faker()
         with open(file_name, 'w', newline='') as file:
             writer = csv.writer(file)

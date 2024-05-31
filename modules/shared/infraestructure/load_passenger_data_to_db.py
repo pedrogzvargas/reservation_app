@@ -1,6 +1,15 @@
 import pandas as pd
-from modules.shared.infraestructure import AlchemyEngineCreator
 
+import os
+import pathlib
+import sys
+
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+PROJECT_PATH = str(pathlib.Path(CURRENT_PATH).parent.parent.parent)
+sys.path.append(os.path.join(PROJECT_PATH))
+
+
+from modules.shared.infraestructure.alchemy_engine_creator import AlchemyEngineCreator
 
 engine_creator = AlchemyEngineCreator()
 engine = engine_creator.create()
