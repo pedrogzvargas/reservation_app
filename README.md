@@ -13,7 +13,7 @@ Author:
 Componentes del proyecto
 ----
 
-### 1. FastApi
+### 1. Python
 ### 2. RabbitMQ
 ### 3. PostgreSQL
 
@@ -23,16 +23,26 @@ Uso con docker y docker compose
 
 Para construir el proyecto con  ``docker-compose`` debemos poner los valore correspondiente en ``.env``
 
+    POSTGRES_DB=<value>
     POSTGRES_USER=<value>
     POSTGRES_PASSWORD=<value>
     POSTGRES_DATA=<value>
     DATABASE_URL=<value>
+    RABBITMQ_ERLANG_COOKIE=<value>
+    RABBITMQ_DEFAULT_USER=<value>
+    RABBITMQ_DEFAULT_PASS=<value>
+    RABBITMQ_DEFAULT_VHOST=<value>
     RABBITMQ_DIR=<value>
     RABBITMQ_URL=<value>
     RABBITMQ_EXCHANGE_NAME=<value>
     RABBITMQ_EXCHANGE_TYPE=<value>
     RABBITMQ_QUEUE_NAME=<value>
+    RABBITMQ_LISTENING_QUEUE_NAME=<value>
     RABBITMQ_ROUTING_KEY=<value>
+
+Existe un archivo de ejemplo en el repositorio y podemos usar el siguiente comando:
+    
+    $ cp local.env .env
 
 Para construir y levantar los contenedores usamos los comandos:
 
@@ -70,7 +80,7 @@ Instalamos los requerimientos:
 
     $ pip install -r requirements.txt
 
-Corremos el proyecto con el siguiente comando:
+Corremos el proyecto con el siguiente comando, ya debemos tenes Postgres y RabbitMQ corriendo:
 
     $  uvicorn app.main_app:app --reload
 
