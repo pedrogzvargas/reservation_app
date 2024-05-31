@@ -8,8 +8,8 @@ services:
       dockerfile: compose/fast_api/app/Dockerfile
     container_name: "traxion-reservation-app"
     depends_on:
-      - postgres
-      - traxion-rabbitmq
+      postgres:
+        condition: service_healthy
     env_file: .env
     volumes:
       - .:/app
@@ -33,6 +33,11 @@ services:
       - ${POSTGRES_DATA}:/var/lib/postgresql/data:Z
     env_file:
       - .env
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 5s
+      timeout: 10s
+      retries: 120
     ports:
       - "5434:5432"
 
@@ -41,7 +46,7 @@ services:
     platform: linux/x86_64
     hostname: traxion-rabbitmq
     container_name: "traxion-rabbitmq"
-    image: rabbitmq:3.8.10-management
+    image: rabbitmq:3-management
     ports:
       - 15672:15672
       - 5672:5672
