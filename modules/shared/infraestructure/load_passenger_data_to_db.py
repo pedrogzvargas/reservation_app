@@ -17,7 +17,7 @@ engine = engine_creator.create()
 
 class LoadPassengerDataToDb:
     @staticmethod
-    def load(file_name: str = "passenger_file.csv"):
+    def load(file_name: str = "csv/passenger_file.csv"):
         data = pd.read_csv(file_name)
         data.to_sql("passengers", engine, index=False, if_exists="append", schema="public")
 

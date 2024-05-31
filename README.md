@@ -75,13 +75,11 @@ Corremos el proyecto con el siguiente comando:
     $  uvicorn app.main_app:app --reload
 
 
-En el repositorio ya existe un archivo con 7000 usuarios, pero de igual manera podemos crear un listado de usuarios con un script Python:
+En el repositorio ya existe un archivo con 7000 usuarios en el folder ``csv``, pero de igual manera podemos crear un listado de usuarios con un script Python:
 
-    $ cd modules/shared/infraestructure
-    $ python passenger_data_generator.py
+    $ cd python modules/shared/infraestructure/passenger_data_generator.py
 
 
-Podemos cargar los usuarios a la base de datos con el siguiente comando, este usa el archivo creado previamente.
+Podemos cargar los usuarios a la base de datos con el siguiente comando, este usa el archivo creado previamente en el folder ``csv``
 
-    $ cd modules/shared/infraestructure
-    $ pyhton load_passenger_data_to_db.py
+    $ cd modules/shared/infraestructure/pyhton load_passenger_data_to_db.py
