@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: compose/fast_api/app/Dockerfile
+    container_name: "traxion-reservation-app"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    command: /start_app.sh
+
+  worker-app:
+    build:
+      context: .
+      dockerfile: compose/fast_api/worker/Dockerfile
+    container_name: "traxion-reservation-worker-app"
+    volumes:
+      - .:/app
+    command: /start_worker.sh
+
+  postgres:
+    image: postgres:12.3
+    container_name: "traxion-reservation-db"
+    volumes:
+      - ${POSTGRES_DATA}:/var/lib/postgresql/data:Z
+    env_file:
+      - .env
+    ports:
+      - "5434:5432"
+
+  traxion-rabbitmq:
+    env_file: .env
+    platform: linux/x86_64
+    hostname: traxion-rabbitmq
+    container_name: "traxion-rabbitmq"
+    image: rabbitmq:3.8.10-management
+    ports:
+      - 15672:15672
+      - 5672:5672
+    volumes:
+      - ${RABBITMQ_DIR}:/var/lib/rabbitmq

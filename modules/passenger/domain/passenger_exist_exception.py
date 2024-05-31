@@ -1,0 +1,2 @@
+class PassengerExistException(Exception):
+    pass
