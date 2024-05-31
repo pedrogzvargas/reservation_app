@@ -7,6 +7,10 @@ services:
       context: .
       dockerfile: compose/fast_api/app/Dockerfile
     container_name: "traxion-reservation-app"
+    depends_on:
+      - postgres
+      - traxion-rabbitmq
+    env_file: .env
     volumes:
       - .:/app
     ports:
