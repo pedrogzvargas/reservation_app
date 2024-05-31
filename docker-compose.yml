@@ -39,7 +39,7 @@ services:
       timeout: 10s
       retries: 120
     ports:
-      - "5434:5432"
+      - "5433:5432"
 
   traxion-rabbitmq:
     env_file: .env
@@ -47,8 +47,14 @@ services:
     hostname: traxion-rabbitmq
     container_name: "traxion-rabbitmq"
     image: rabbitmq:3-management
+    networks:
+      - reservation-app-net
     ports:
       - 15672:15672
       - 5672:5672
     volumes:
       - ${RABBITMQ_DIR}:/var/lib/rabbitmq
+
+networks:
+  reservation-app-net:
+    external: true

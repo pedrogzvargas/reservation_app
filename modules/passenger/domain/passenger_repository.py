@@ -1,7 +1,7 @@
 from uuid import UUID
 from abc import ABC
 from abc import abstractmethod
-from modules.reservation.domain.entity import Reservation
+from modules.passenger.domain.entity import Passenger
 
 
 class PassengerRepository(ABC):
@@ -25,8 +25,8 @@ class PassengerRepository(ABC):
         pass
 
     @abstractmethod
-    def create(self, reservation: Reservation):
-        """create passengers"""
+    def create(self, passenger: Passenger):
+        """create passenger"""
         pass
 
     def patch(self, passenger_id: UUID, passenger_data: dict):
@@ -34,5 +34,5 @@ class PassengerRepository(ABC):
 
     @abstractmethod
     def delete(self, id: UUID):
-        """delete passengers"""
+        """delete passenger"""
         pass

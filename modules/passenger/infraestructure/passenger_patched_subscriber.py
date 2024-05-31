@@ -1,4 +1,5 @@
 from .patch_passenger_controller import PatchPassengerController
+from modules.shared.infraestructure import FakeEventPublisher
 
 
 class PassengerPatchedSubscriber:
@@ -15,7 +16,10 @@ class PassengerPatchedSubscriber:
 
     def __call__(self, body):
         try:
-            patch_passenger_controller = PatchPassengerController()
+            fake_event_publisher = FakeEventPublisher()
+            patch_passenger_controller = PatchPassengerController(
+                event_publisher=fake_event_publisher,
+            )
             patch_passenger_controller(
                 passenger_id=body.get("id"),
                 passenger_data=body.get("data"),

@@ -1,4 +1,5 @@
 from .create_passenger_controller import CreatePassengerController
+from modules.shared.infraestructure import FakeEventPublisher
 
 
 class PassengerCreatedSubscriber:
@@ -15,7 +16,10 @@ class PassengerCreatedSubscriber:
 
     def __call__(self, body):
         try:
-            create_passenger_controller = CreatePassengerController()
+            fake_event_publisher = FakeEventPublisher()
+            create_passenger_controller = CreatePassengerController(
+                event_publisher=fake_event_publisher,
+            )
             create_passenger_controller(
                 id=body.get("id"),
                 name=body.get("name"),
