@@ -17,6 +17,8 @@ Componentes del proyecto
 ### 2. RabbitMQ
 ### 3. PostgreSQL
 
+Este proyecto se complementa con el servicio [passenger_app](https://github.com/pedrogzvargas/passenger_app)
+
 
 Uso con docker y docker compose
 -----
@@ -43,6 +45,10 @@ Para construir el proyecto con  ``docker-compose`` debemos poner los valore corr
 Existe un archivo de ejemplo en el repositorio y podemos usar el siguiente comando:
     
     $ cp local.env .env
+
+Creamos la red de docker que nos serviará para poder ver entre contenedores:
+
+    $ docker network create reservation-app-net
 
 Para construir y levantar los contenedores usamos los comandos:
 
@@ -93,3 +99,8 @@ En el repositorio ya existe un archivo con 7000 usuarios en el folder ``csv``, p
 Podemos cargar los usuarios a la base de datos con el siguiente comando, este usa el archivo creado previamente en el folder ``csv``
 
     $ python modules/shared/infraestructure/load_passenger_data_to_db.py
+
+Se utlizó Kombu como instancia para el consumo de mensajes de Rabbit, existe un script que corre el consumer:
+
+
+    $ python app/consumer.py
